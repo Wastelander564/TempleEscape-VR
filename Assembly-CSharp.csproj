@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\ProgressScript.cs" />
+    <Compile Include="Assets\Scripts\CameraLock.cs" />
     <Compile Include="Assets\Scripts\ScaleScript.cs" />
     <Compile Include="Assets\Scripts\StartScreenButton.cs" />
     <Compile Include="Assets\Scripts\EndScreenButtonsScript.cs" />
