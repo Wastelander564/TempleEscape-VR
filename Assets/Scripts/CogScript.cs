@@ -5,6 +5,19 @@ public class CogScript : MonoBehaviour
     public GameObject[] cogSockets;  // Array of sockets
     public GameObject[] correctCogs; // Array of correct cogs
     public bool activationSignal = false; // Bool signal for ProgressScript
+    public AudioClip activationSound; // Audio clip to play when signal is true
+    private AudioSource audioSource;
+
+    private bool audioPlayed = false; // To ensure the sound plays only once
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+    }
 
     private void Update()
     {
@@ -22,12 +35,19 @@ public class CogScript : MonoBehaviour
             {
                 // If any socket does not have the correct cog, deactivate the signal
                 activationSignal = false;
+                audioPlayed = false; // Reset audio trigger if activationSignal is false
                 return;
             }
         }
 
         // If all sockets have the correct cogs, activate the signal
         activationSignal = true;
+
+        if (!audioPlayed && activationSound != null)
+        {
+            audioSource.PlayOneShot(activationSound);
+            audioPlayed = true;
+        }
     }
 
     // Helper function to check if a specific cog is in the correct socket
